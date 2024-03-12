@@ -1,8 +1,16 @@
 import QtQuick
+import QtQuick.Controls
 
-Window {
-    width: 640
-    height: 480
+Window
+{
+    width: 430
+    height: 100
     visible: true
-    title: qsTr("Hello World")
+
+    StackView
+    {
+        id: loader
+        anchors.fill: parent
+        initialItem: "qrc:/LivingLogic/initial.qml"
+    }
 }
