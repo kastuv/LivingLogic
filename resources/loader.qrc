@@ -3,5 +3,6 @@
         <file alias="loader">comp.gif</file>
         <file>icon.png</file>
         <file alias="arrow">backarrow.png</file>
+        <file alias="home">home.png</file>
     </qresource>
 </RCC>

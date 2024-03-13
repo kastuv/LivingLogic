@@ -71,7 +71,6 @@ Page
         radius: 20
         anchors.horizontalCenter: parent.horizontalCenter
         anchors.top: logo.bottom
-        anchors.topMargin: 5
         color: "#9747FE"
 
         ColumnLayout
@@ -94,7 +93,7 @@ Page
                 font.weight: 600
                 font.pixelSize: 15
                 Layout.alignment: Qt.AlignLeft | Qt.AlignTop
-                Layout.topMargin: 40
+                Layout.topMargin: 20
                 color: "#f2f2f2"
             }
 
@@ -142,10 +141,83 @@ Page
             {
                 id: gpt
                 width: parent.width
-                height: 560
+                height: 530
                 color: "#B37BFD"
+                radius: 20
+
+                Text
+                {
+                    id: lega
+                    text: qsTr("Legalities and Permits")
+                    font.family: eReg.name
+                    font.weight: 400
+                    font.pixelSize: 15
+                    anchors.top: parent.top
+                    anchors.left: parent.left
+                    anchors.topMargin: 20
+                    anchors.leftMargin: 20
+                    color: "#f2f2f2"
+                }
+
+                Rectangle
+                {
+                    id: line
+                    width: parent.width
+                    height: 1
+                    color: "#f2f2f2"
+                    anchors.top: lega.bottom
+                    anchors.topMargin: 10
+                }
+
+                Rectangle
+                {
+                    id: textbox
+                    width: 350
+                    height: 40
+                    radius: 50
+                    color: "Transparent"
+                    border.color: "#f2f2f2"
+                    border.width: 1
+                    anchors.horizontalCenter: parent.horizontalCenter
+                    anchors.bottom: parent.bottom
+                    anchors.bottomMargin: 20
+
+                    Text {
+                        id: askme
+                        text: qsTr("Ask me")
+                        font.family: eReg.name
+                        font.weight: 400
+                        font.pixelSize: 15
+                        anchors.verticalCenter: parent.verticalCenter
+                        anchors.left: parent.left
+                        anchors.topMargin: 20
+                        anchors.leftMargin: 20
+                        color: "#f2f2f2"
+                    }
+                }
+            }
+
+            Rectangle
+            {
+                id: nav
+                height: 55
+                width: 385
+                color: "#B37BFD"
+                radius: 20
+                Layout.alignment: Qt.AlignTop | Qt.AlignHCenter
+
+                Image {
+                    id: home
+                    source: "qrc:/"
+                    anchors.top: parent.top
+                    anchors.horizontalCenter: parent.horizontalCenter
+                    anchors.topMargin: 5
+                    width: 70
+                    height: 70
+                    fillMode: Image.PreserveAspectFit
+                }
+
             }
         }
     }
-
 }
