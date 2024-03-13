@@ -31,6 +31,9 @@ qt_add_qml_module(appLivingLogic
     RESOURCES resources/fonts.qrc
     QML_FILES imgup.qml
     QML_FILES parameter.qml
+    QML_FILES partition.qml
+    QML_FILES contractor.qml
+
 )
 
 # Qt for iOS sets MACOSX_BUNDLE_GUI_IDENTIFIER automatically since Qt 6.1.

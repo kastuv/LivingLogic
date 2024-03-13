@@ -50,7 +50,7 @@ Page
             }
 
             onClicked: {
-                loader.push("qrc:/LivingLogic/imgup.qml")
+                loader.push("qrc:/LivingLogic/parameter.qml")
             }
         }
     }
@@ -81,22 +81,76 @@ Page
             height: 850
             anchors.horizontalCenter: parent.horizontalCenter
             anchors.top: parent.top
-            spacing: 15
+            spacing: 10
 
-            Text {
-                id: text1
-                FontLoader
-                {
-                    id: eBold;
-                    source: "qrc:/eBold";
+            ColumnLayout
+            {
+                width: 385
+                height: 850
+                Layout.alignment: Qt.AlignHCenter | Qt.AlignTop
+                spacing: 1
+
+                Text {
+                    id: text1
+                    FontLoader
+                    {
+                        id: eBold;
+                        source: "qrc:/eBold";
+                    }
+                    text: qsTr("Choose any one optimal generated design partition \nfor your space.")
+                    font.family: eBold.name
+                    font.weight: 600
+                    font.pixelSize: 16
+                    Layout.alignment: Qt.AlignLeft | Qt.AlignTop
+                    Layout.topMargin: 20
+                    color: "#f2f2f2"
                 }
-                text: qsTr("Sq. feet of the flat")
-                font.family: eBold.name
-                font.weight: 600
-                font.pixelSize: 15
-                Layout.alignment: Qt.AlignLeft | Qt.AlignTop
-                Layout.topMargin: 20
+
+                Text {
+                    id: text2
+                    FontLoader
+                    {
+                        id: eReg;
+                        source: "qrc:/eRegular";
+                    }
+                    text: qsTr("(Adjust the previous settings to change your needs, and generate \nagain.)")
+                    font.family: eReg.name
+                    font.weight: 400
+                    font.pixelSize: 13
+                    Layout.alignment: Qt.AlignLeft | Qt.AlignTop
+                    color: "#f2f2f2"
+                }
+
+            }
+
+            Rectangle
+            {
+                id: p1
+                width: parent.width
+                height: 185
                 color: "#f2f2f2"
+                radius: 20
+                Layout.alignment: Qt.AlignHCenter
+            }
+
+            Rectangle
+            {
+                id: p2
+                width: parent.width
+                height: 185
+                color: "#f2f2f2"
+                radius: 20
+                Layout.alignment: Qt.AlignHCenter
+            }
+
+            Rectangle
+            {
+                id: p3
+                width: parent.width
+                height: 185
+                color: "#f2f2f2"
+                radius: 20
+                Layout.alignment: Qt.AlignHCenter
             }
 
             Rectangle
@@ -153,7 +207,7 @@ Page
                             anchors.fill: parent
                             onClicked:
                             {
-                                loader.push("qrc:/LivingLogic/partition.qml")
+                                loader.push("qrc:/LivingLogic/contractor.qml")
                             }
                         }
                     }
