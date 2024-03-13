@@ -13,7 +13,8 @@ Page
         color: "#f2f2f2"
     }
 
-    Image {
+    Image
+    {
         id: logo
         source: "qrc:/icon.png"
         anchors.top: parent.top
@@ -206,17 +207,40 @@ Page
                 radius: 20
                 Layout.alignment: Qt.AlignTop | Qt.AlignHCenter
 
-                Image {
+                Image
+                {
                     id: home
-                    source: "qrc:/"
-                    anchors.top: parent.top
-                    anchors.horizontalCenter: parent.horizontalCenter
-                    anchors.topMargin: 5
-                    width: 70
-                    height: 70
+                    source: "qrc:/home"
+                    width: 20
+                    height: 20
                     fillMode: Image.PreserveAspectFit
+                    anchors.verticalCenter: parent.verticalCenter
+                    anchors.left: parent.left
+                    anchors.leftMargin: 50
                 }
 
+                Image
+                {
+                    id: cam
+                    source: "qrc:/cam"
+                    width: 30
+                    height: 30
+                    fillMode: Image.PreserveAspectFit
+                    anchors.verticalCenter: parent.verticalCenter
+                    anchors.horizontalCenter: parent.horizontalCenter
+                }
+
+                Image
+                {
+                    id: setting
+                    source: "qrc:/setting"
+                    width: 20
+                    height: 20
+                    fillMode: Image.PreserveAspectFit
+                    anchors.verticalCenter: parent.verticalCenter
+                    anchors.right: parent.right
+                    anchors.rightMargin: 50
+                }
             }
         }
     }

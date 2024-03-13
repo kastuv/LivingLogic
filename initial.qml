@@ -21,6 +21,7 @@ Page
         anchors.horizontalCenter: parent.horizontalCenter
         anchors.top: parent.top
         anchors.topMargin:200
+
         Rectangle
         {
             id:loadgif
