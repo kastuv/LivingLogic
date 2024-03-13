@@ -67,7 +67,7 @@ Page
     Rectangle
     {
         id: body
-        height: 950
+        height: 850
         width: 430
         radius: 20
         anchors.horizontalCenter: parent.horizontalCenter
@@ -78,6 +78,7 @@ Page
         {
             id: bodyEl
             width: 385
+            height: 850
             anchors.horizontalCenter: parent.horizontalCenter
             anchors.top: parent.top
             spacing: 15
@@ -205,7 +206,8 @@ Page
                 width: 385
                 color: "#B37BFD"
                 radius: 20
-                Layout.alignment: Qt.AlignTop | Qt.AlignHCenter
+                Layout.alignment: Qt.AlignBottom | Qt.AlignHCenter
+                Layout.bottomMargin: 100
 
                 Image
                 {
@@ -240,6 +242,21 @@ Page
                     anchors.verticalCenter: parent.verticalCenter
                     anchors.right: parent.right
                     anchors.rightMargin: 50
+
+                    Rectangle
+                    {
+                        anchors.fill: parent
+                        color: "Transparent"
+
+                        MouseArea
+                        {
+                            anchors.fill: parent
+                            onClicked:
+                            {
+                                loader.push("qrc:/LivingLogic/parameter.qml")
+                            }
+                        }
+                    }
                 }
             }
         }
