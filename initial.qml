@@ -57,7 +57,7 @@ Page
                     font.family: eBold.name
                     font.pixelSize: 40
                     font.weight: 550
-                    color: "#FFFFFF"
+                    color: "#f2f2f2"
                     Layout.alignment: Qt.AlignCenter
                 }
 
@@ -93,7 +93,7 @@ Page
                         text: qsTr("Yes")
                         font.family: eReg.name;
                         font.pixelSize: 15;
-                        color: "#FFFFFF";
+                        color: "#f2f2f2";
                         anchors.centerIn: parent
                     }
                 }
@@ -106,11 +106,29 @@ Page
                     radius: 15
                     color: "#AB7DF5"
                     Text {
+                        id: nT
                         text: qsTr("No")
                         font.family: eReg.name;
                         font.pixelSize: 15;
-                        color: "#FFFFFF";
+                        color: "#f2f2f2";
                         anchors.centerIn: parent
+                    }
+
+                    MouseArea
+                    {
+                        id:nA
+                        anchors.fill: parent
+                        onPressed:
+                        {
+                            no.color = "#f2f2f2"
+                            nT.color = "#9747FE"
+
+                        }
+
+                        onClicked:
+                        {
+                            loader.push("qrc:/LivingLogic/imgup.qml")
+                        }
                     }
                 }
             }

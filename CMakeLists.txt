@@ -9,8 +9,17 @@ set(CMAKE_AUTORCC ON)
 
 find_package(Qt6 6.2 COMPONENTS Quick REQUIRED)
 
+#set(APP_ICON_FILES
+#    "icon.png"
+#)
+
+#qt_add_resources(APP_ICON_RESOURCES
+#    ${APP_ICON_FILES}
+#)
+
 qt_add_executable(appLivingLogic
     main.cpp
+    #${APP_ICON_RESOURCES}
 )
 
 qt_add_qml_module(appLivingLogic
@@ -20,6 +29,7 @@ qt_add_qml_module(appLivingLogic
     QML_FILES initial.qml
     RESOURCES resources/loader.qrc
     RESOURCES resources/fonts.qrc
+    QML_FILES imgup.qml
 )
 
 # Qt for iOS sets MACOSX_BUNDLE_GUI_IDENTIFIER automatically since Qt 6.1.
@@ -32,6 +42,10 @@ set_target_properties(appLivingLogic PROPERTIES
     MACOSX_BUNDLE TRUE
     WIN32_EXECUTABLE TRUE
 )
+
+#set_target_properties(appLivingLogic PROPERTIES
+#    XCODE_ATTRIBUTE_ASSETCATALOG_COMPILER_APPICON_NAME "AppIcon"
+#)
 
 target_link_libraries(appLivingLogic
     PRIVATE Qt6::Quick)
