@@ -83,21 +83,21 @@ Page
             anchors.top: parent.top
             spacing: 15
 
-            Text {
-                id: text1
-                FontLoader
-                {
-                    id: eBold;
-                    source: "qrc:/eBold";
-                }
-                text: qsTr("Sq. feet of the flat")
-                font.family: eBold.name
-                font.weight: 600
-                font.pixelSize: 15
-                Layout.alignment: Qt.AlignLeft | Qt.AlignTop
-                Layout.topMargin: 20
-                color: "#f2f2f2"
-            }
+            // Text {
+            //     id: text1
+            //     FontLoader
+            //     {
+            //         id: eBold;
+            //         source: "qrc:/eBold";
+            //     }
+            //     text: qsTr("Sq. feet of the flat")
+            //     font.family: eBold.name
+            //     font.weight: 600
+            //     font.pixelSize: 15
+            //     Layout.alignment: Qt.AlignLeft | Qt.AlignTop
+            //     Layout.topMargin: 20
+            //     color: "#f2f2f2"
+            // }
 
             Rectangle
             {
@@ -153,7 +153,7 @@ Page
                             anchors.fill: parent
                             onClicked:
                             {
-                                loader.push("qrc:/LivingLogic/partition.qml")
+                                loader.push("qrc:/LivingLogic/report.qml")
                             }
                         }
                     }
