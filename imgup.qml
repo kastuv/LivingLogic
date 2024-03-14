@@ -147,6 +147,7 @@ Page
                 color: "#B37BFD"
                 radius: 20
 
+
                 Text
                 {
                     id: lega
@@ -171,30 +172,45 @@ Page
                     anchors.topMargin: 10
                 }
 
-                Rectangle
-                {
+                Rectangle {
                     id: textbox
                     width: 350
-                    height: 40
+                    height: Math.min(askme.contentHeight, parent.height) + 40 // Adjusted to accommodate margins and borders
                     radius: 50
-                    color: "Transparent"
+                    color: "transparent"
                     border.color: "#f2f2f2"
                     border.width: 1
                     anchors.horizontalCenter: parent.horizontalCenter
                     anchors.bottom: parent.bottom
                     anchors.bottomMargin: 20
 
-                    Text {
+                    TextArea {
                         id: askme
-                        text: qsTr("Ask me")
-                        font.family: eReg.name
-                        font.weight: 400
+                        placeholderText: qsTr("Ask me")
                         font.pixelSize: 15
-                        anchors.verticalCenter: parent.verticalCenter
-                        anchors.left: parent.left
-                        anchors.topMargin: 20
-                        anchors.leftMargin: 20
+                        background: Rectangle
+                        {
+                            color: "Transparent"
+                        }
+
+                        wrapMode: TextArea.Wrap
                         color: "#f2f2f2"
+                        anchors.fill: parent
+                        topPadding: 20
+                        rightPadding: 25
+                        leftPadding: 25
+                        verticalAlignment: TextArea.AlignTop // Align text to the top
+
+                        onCursorRectangleChanged: {
+                            if (cursorRectangle.y + cursorRectangle.height > textbox.height) {
+                                // Scroll to the end of the text when the cursor approaches the bottom
+                                askme.ensureVisible(0, askme.contentHeight)
+                            }
+                        }
+
+                        onTextChanged: {
+                            textbox.height = Math.min(askme.contentHeight, parent.height) + 40 // Adjusted to accommodate margins and borders
+                        }
                     }
                 }
             }
