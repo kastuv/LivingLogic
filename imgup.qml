@@ -188,10 +188,7 @@ Page
                         id: askme
                         placeholderText: qsTr("Ask me")
                         font.pixelSize: 15
-                        background: Rectangle
-                        {
-                            color: "Transparent"
-                        }
+                        background: null
 
                         wrapMode: TextArea.Wrap
                         color: "#f2f2f2"
