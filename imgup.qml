@@ -202,11 +202,11 @@ Page
                     anchors.horizontalCenter: parent.horizontalCenter
                     clip: true
 
-                    Flickable
-                    {
+                    Flickable {
+                        id: flickable
                         anchors.fill: parent
                         contentWidth: parent.width
-                        contentHeight: Math.max(askme.height + 50, height)
+                        contentHeight: scroll.height
                         flickableDirection: Flickable.VerticalFlick
                     }
                 }
@@ -346,10 +346,17 @@ Page
         }
     }
 
-    function createChatBubble(text, finalSize) {
-        var size = askme.height.toString();
-        var newRect = Qt.createQmlObject('import QtQuick 2.15; Rectangle { width: gpt.width - 50; height: ' + size + '; radius: 10; color: "#f2f2f2"; anchors.horizontalCenter: parent.horizontalCenter; anchors.top: line.bottom; anchors.topMargin: 20; }', scroll);
-        var newText = Qt.createQmlObject('import QtQuick 2.15; Text { text: "' + text + '"; color: "#9747FE"; width: parent.width - 40; wrapMode: Text.WordWrap; anchors.left: parent.left; anchors.leftMargin: 20; anchors.verticalCenter: parent.verticalCenter }', newRect);
+    function createChatBubble(text) {
+        var size = askme.contentHeight + 50; // Adding a buffer for additional space
+        var newRect = Qt.createQmlObject('import QtQuick 2.15; Rectangle { width: gpt.width - 50; height: ' + size + '; radius: 10; color: "#f2f2f2"; anchors.horizontalCenter: parent.horizontalCenter; }', flickable.contentItem);
+        var newText = Qt.createQmlObject('import QtQuick 2.15; Text { text: "' + text + '"; color: "#9747FE"; width: parent.width - 40; wrapMode: Text.WordWrap; anchors.left: parent.left; anchors.leftMargin: 20; anchors.top: parent.top; anchors.topMargin: 20; anchors.right: parent.right; }', newRect);
+
+        // Update contentHeight of Flickable
+        flickable.contentHeight = size + 100;
+
+        // Ensure the new content is visible
+        //flickable.contentY = flickable.contentHeight;
     }
+
 
 }
