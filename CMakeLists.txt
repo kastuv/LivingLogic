@@ -33,6 +33,7 @@ qt_add_qml_module(appLivingLogic
     QML_FILES parameter.qml
     QML_FILES partition.qml
     QML_FILES contractor.qml
+    SOURCES gptserver.h gptserver.cpp
 
 )
 
