@@ -1,10 +1,13 @@
 import QtQuick
 import QtQuick.Controls
 import QtQuick.Layouts
+import com.example 1.0
+
 
 Page
 {
     id: imgup
+    property var prevBubble: null
     width: 430
     height: 1000
     visible: true
@@ -193,22 +196,55 @@ Page
                     anchors.topMargin: 10
                 }
 
-                Rectangle {
-                    id: scroll
-                    height: 370
-                    width: parent.width
-                    anchors.top: line.top
-                    anchors.topMargin: 30
-                    anchors.horizontalCenter: parent.horizontalCenter
-                    clip: true
-                    color: "Transparent"
+                Rectangle
+                {
+                            id: scroll
+                            height: 370
+                            width: parent.width
+                            anchors.top: line.top
+                            anchors.topMargin: 30
+                            anchors.horizontalCenter: parent.horizontalCenter
+                            clip: true
+                            color: "Transparent"
 
-                    Flickable {
-                        id: flickable
-                        anchors.fill: parent
-                        contentWidth: parent.width
-                        contentHeight: scroll.height
-                        flickableDirection: Flickable.VerticalFlick
+                            Flickable {
+                                id: flickable
+                                anchors.fill: parent
+                                contentWidth: parent.width
+                                contentHeight: contentItem.height
+                                flickableDirection: Flickable.VerticalFlick
+                                clip: true
+
+                                // Rectangle {
+                                //     id: contentItem
+                                //     width: parent.width
+                                //     height: Math.max(gpt.height, flickable.height)
+
+                                //     // This item will contain all the chat bubbles
+                                // }
+                            }
+                        }
+
+
+                Text {
+                    id: recvv
+                    text: qsTr("")
+                    wrapMode: Text.Wrap
+                    color: "Transparent"
+                    Connections
+                    {
+                        target: gptServer
+                        function onMessageReceived(message)
+                        {
+                            recvv.text = message;
+                            createChatBubble(message, false);
+                            recvv.height = Math.min(askme.contentHeight, parent.height) + 40
+                        }
+
+                    }
+                    Component.onCompleted:
+                    {
+                        console.log("chatReceiver:", gptServer)
                     }
                 }
 
@@ -251,8 +287,7 @@ Page
                     }
                 }
 
-                Rectangle
-                {
+                Rectangle {
                     id: submitButton
                     width: 30
                     height: 30
@@ -269,18 +304,17 @@ Page
                     anchors.bottom: textbox.top
                     anchors.bottomMargin: 10
 
-                    MouseArea
-                    {
-                        anchors.fill: parent
 
-                        onClicked:
-                        {
+                    MouseArea {
+                        anchors.fill: parent
+                        propagateComposedEvents: true
+                        onClicked: {
                             var textToSend = askme.text.trim();
-                                    if (textToSend !== "") {
-                                        gptServer.sendToClient(textToSend);
-                                    }
-                            createChatBubble(askme.text, askme.height)
-                            askme.text = ""
+                            askme.text = "";
+                            if (textToSend !== "") {
+                                gptServer.sendToClient(textToSend);
+                            }
+                            createChatBubble(textToSend, true);
                         }
                     }
                 }
@@ -351,26 +385,47 @@ Page
         }
     }
 
-    function createChatBubble(text, source) {
-        var size = askme.contentHeight + 50;
-        var newRect = Qt.createQmlObject('import QtQuick 2.15; Rectangle { width: gpt.width - 50; height: ' + size + '; radius: 10; color: "#f2f2f2"; opacity: 0.5; anchors.horizontalCenter: parent.horizontalCenter; }', flickable.contentItem);
-        newRect.anchors.top = (source === "client") ? prevRect.bottom : scroll.top;
-        newRect.anchors.topMargin = (source === "client") ? 20 : 0;
+    function createChatBubble(text, isOutgoing) {
+        var bubble = Qt.createQmlObject(
+            'import QtQuick 2.15; Rectangle { width: gpt.width - 100; radius: 10; color: "#f2f2f2"; opacity: 0.7; }',
+            flickable.contentItem
+        );
 
-        var newText = Qt.createQmlObject('import QtQuick 2.15; Text { text: "' + text + '"; color: "#9747FE"; width: parent.width - 40; wrapMode: Text.WordWrap; anchors.left: parent.left; anchors.leftMargin: 20; }', newRect);
-        newText.anchors.top = newRect.top;
-        newText.anchors.topMargin = 20;
+        var newText = Qt.createQmlObject(
+            'import QtQuick 2.15; Text { color: "#f2f2f2"; opacity: 0.7; width: parent.width - 10; wrapMode: Text.Wrap; leftPadding: 20; rightPadding: 20; topPadding: 10; bottomPadding: 10; }',
+            bubble
+        );
 
-        // Update contentHeight of Flickable
-        flickable.contentHeight = size + 100;
+        newText.text = text;
 
-        // Store the reference to the new rectangle for positioning the next one
-        var prevRect = newRect;
+        var bubbleHeight = newText.implicitHeight + 20;
+        bubble.height = bubbleHeight;
+
+        if (isOutgoing) {
+            bubble.anchors.top = flickable.contentItem.top;
+            bubble.anchors.right = flickable.contentItem.right;
+            bubble.anchors.rightMargin = 20;
+            bubble.opacity = 0.7;
+            bubble.color = "#9747FE";
+            newText.color = "#f2f2f2";
+        } else {
+            bubble.anchors.top = prevBubble ? prevBubble.bottom : flickable.contentItem.top;
+            bubble.anchors.topMargin = 20;
+            bubble.anchors.left = flickable.contentItem.left;
+            bubble.anchors.leftMargin = 20;
+            bubble.opacity = 0.7;
+            bubble.color = "#f2f2f2";
+            newText.color = "#9747FE";
+        }
+
+        prevBubble = bubble;
+        flickable.contentItem.children.push(bubble);
+
+        flickable.contentY = flickable.contentHeight - flickable.height;
+
+        recvv.anchors.top = bubble.bottom + 10;
+        textbox.anchors.top = recvv.bottom + 10;
+        submitButton.anchors.bottom = textbox.top - 10;
+        return bubbleHeight;
     }
-
-    // Inside the function where you receive messages from the client
-    function receiveMessageFromClient(message) {
-        createChatBubble(message, "client");
-    }
-
 }

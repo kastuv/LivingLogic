@@ -6,11 +6,13 @@
 int main(int argc, char *argv[])
 {
     QGuiApplication app(argc, argv);
+    GptServer gptServer;
+    qmlRegisterType<GptServer>("com.example", 1, 0, "GptServer");
 
     QQmlApplicationEngine engine;
 
-    GptServer gptServer;
     engine.rootContext()->setContextProperty("gptServer", &gptServer);
+
     const QUrl url(u"qrc:/LivingLogic/main.qml"_qs);
     QObject::connect(
         &engine,

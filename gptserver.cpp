@@ -1,9 +1,9 @@
 // gptserver.cpp
+
 #include "gptserver.h"
 
-GptServer::GptServer(QObject *parent) : QObject(parent), clientSocket(nullptr)
+GptServer::GptServer(QObject *parent) : QObject(parent), tcpServer(new QTcpServer(this)), clientSocket(nullptr)
 {
-    tcpServer = new QTcpServer(this);
     connect(tcpServer, &QTcpServer::newConnection, this, &GptServer::newConnection);
 }
 
@@ -37,23 +37,24 @@ void GptServer::newConnection()
 void GptServer::readyRead()
 {
     if (clientSocket && clientSocket->bytesAvailable() > 0) {
-        QByteArray data = clientSocket->readAll();
+        QByteArray data = clientSocket->readAll();//acts as a buffer
         QString message = QString::fromUtf8(data);
         emit messageReceived(message);
+        processClientMessage(message); // Assuming you want to process the message
     }
 }
 
 void GptServer::processClientMessage(const QString &message) {
-    // Handle the received message here
     qDebug() << "Received message from client:" << message;
-    // Here you can emit a signal or perform any other necessary processing
+    m_message = message;
 }
-
 
 void GptServer::sendToClient(const QString &message)
 {
     if (clientSocket && clientSocket->state() == QTcpSocket::ConnectedState) {
         QByteArray byteArray = message.toUtf8();
         clientSocket->write(byteArray);
+    } else {
+        qWarning() << "Client is not connected.";
     }
 }

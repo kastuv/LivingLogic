@@ -5,8 +5,6 @@
 #include <QObject>
 #include <QTcpServer>
 #include <QTcpSocket>
-#include <QHostAddress>
-#include <QTimer>
 
 class GptServer : public QObject
 {
@@ -14,21 +12,20 @@ class GptServer : public QObject
 public:
     explicit GptServer(QObject *parent = nullptr);
     Q_INVOKABLE void startServer();
-
-public slots:
-    void sendToClient(const QString &message);
-    void processClientMessage(const QString &message);
+    Q_INVOKABLE void sendToClient(const QString &message);
 
 signals:
     void messageReceived(const QString &message);
 
-private slots:
+public slots:
     void newConnection();
     void readyRead();
+    void processClientMessage(const QString &message);
 
 private:
     QTcpServer *tcpServer;
     QTcpSocket *clientSocket;
+    QString m_message;
 };
 
 #endif // GPTSERVER_H
