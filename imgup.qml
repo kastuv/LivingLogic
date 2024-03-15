@@ -1,7 +1,6 @@
 import QtQuick
 import QtQuick.Controls
 import QtQuick.Layouts
-import QtQuick.Dialogs
 
 Page
 {
@@ -196,11 +195,13 @@ Page
 
                 Rectangle {
                     id: scroll
-                    height: 400
+                    height: 370
                     width: parent.width
                     anchors.top: line.top
+                    anchors.topMargin: 30
                     anchors.horizontalCenter: parent.horizontalCenter
                     clip: true
+                    color: "Transparent"
 
                     Flickable {
                         id: flickable
@@ -348,8 +349,8 @@ Page
 
     function createChatBubble(text) {
         var size = askme.contentHeight + 50; // Adding a buffer for additional space
-        var newRect = Qt.createQmlObject('import QtQuick 2.15; Rectangle { width: gpt.width - 50; height: ' + size + '; radius: 10; color: "#f2f2f2"; anchors.horizontalCenter: parent.horizontalCenter; }', flickable.contentItem);
-        var newText = Qt.createQmlObject('import QtQuick 2.15; Text { text: "' + text + '"; color: "#9747FE"; width: parent.width - 40; wrapMode: Text.WordWrap; anchors.left: parent.left; anchors.leftMargin: 20; anchors.top: parent.top; anchors.topMargin: 20; anchors.right: parent.right; }', newRect);
+        var newRect = Qt.createQmlObject('import QtQuick; Rectangle { width: gpt.width - 50; height: ' + size + '; radius: 10; color: "#f2f2f2"; opacity: 0.5; anchors.horizontalCenter: parent.horizontalCenter; anchors.top: scroll.top; anchors.topMargin: 20}', flickable.contentItem);
+        var newText = Qt.createQmlObject('import QtQuick; Text { text: "' + text + '"; color: "#9747FE"; width: parent.width - 40; wrapMode: Text.WordWrap; anchors.left: parent.left; anchors.leftMargin: 20; anchors.top: parent.top; anchors.topMargin: 20; anchors.right: parent.right; }', newRect);
 
         // Update contentHeight of Flickable
         flickable.contentHeight = size + 100;
