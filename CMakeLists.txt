@@ -7,6 +7,17 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTORCC ON)
 
+set(my_ios_resource_assets
+    "${CMAKE_CURRENT_SOURCE_DIR}/ios/Assets.xcassets"
+)
+
+#target_sources(${LivingLogic} PRIVATE ${my_ios_resource_assets})
+
+set_source_files_properties(${my_ios_resource_assets}
+    PROPERTIES
+        MACOSX_PACKAGE_LOCATION Resources
+)
+
 find_package(Qt6 6.2 COMPONENTS Quick REQUIRED)
 
 #set(APP_ICON_FILES
@@ -19,7 +30,7 @@ find_package(Qt6 6.2 COMPONENTS Quick REQUIRED)
 
 qt_add_executable(appLivingLogic
     main.cpp
-    #${APP_ICON_RESOURCES}
+    ${APP_ICON_RESOURCES}
 )
 
 qt_add_qml_module(appLivingLogic

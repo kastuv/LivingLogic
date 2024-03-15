@@ -173,6 +173,22 @@ Page
                     anchors.verticalCenter: parent.verticalCenter
                     anchors.left: parent.left
                     anchors.leftMargin: 50
+
+                    Rectangle
+                    {
+                        anchors.centerIn: parent
+                        height: 40
+                        width: 40
+                        color: "Transparent"
+                        MouseArea
+                        {
+                            anchors.fill: parent
+                            onClicked:
+                            {
+                                loader.push("qrc:/LivingLogic/imgup.qml")
+                            }
+                        }
+                    }
                 }
 
                 Image
@@ -199,7 +215,9 @@ Page
 
                     Rectangle
                     {
-                        anchors.fill: parent
+                        anchors.centerIn: parent
+                        height: 40
+                        width: 40
                         color: "Transparent"
 
                         MouseArea

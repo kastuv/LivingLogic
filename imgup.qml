@@ -1,6 +1,7 @@
 import QtQuick
 import QtQuick.Controls
 import QtQuick.Layouts
+import QtQuick.Dialogs
 
 Page
 {
@@ -137,7 +138,28 @@ Page
                         color: "#f2f2f2"
                     }
                 }
+
+                MouseArea {
+                            anchors.fill: parent
+                        //     onClicked: {
+                        //         if (Qt.platform.os === "ios") {
+                        //             openIOSGallery()
+                        //         } else {
+                        //             console.log("Gallery access not supported on this platform.")
+                        //         }
+                        //     }
+                        }
+
             }
+            // function openIOSGallery() {
+            //         // Access iOS photo gallery using platform-specific code
+            //         // This is Objective-C code to access iOS photo gallery
+            //         var obj = new Object();
+            //         obj.openGallery = function() {
+            //             Qt.createQmlObject('import QtQuick 2.0; Image { source: "image.jpg" }', parent, "dynamicSnippet1");
+            //         }
+            //         obj.openGallery();
+            //     }
 
             Rectangle
             {
@@ -173,6 +195,23 @@ Page
                 }
 
                 Rectangle {
+                    id: scroll
+                    height: 400
+                    width: parent.width
+                    anchors.top: line.top
+                    anchors.horizontalCenter: parent.horizontalCenter
+                    clip: true
+
+                    Flickable
+                    {
+                        anchors.fill: parent
+                        contentWidth: parent.width
+                        contentHeight: Math.max(askme.height + 50, height)
+                        flickableDirection: Flickable.VerticalFlick
+                    }
+                }
+
+                Rectangle {
                     id: textbox
                     width: 350
                     height: Math.min(askme.contentHeight, parent.height) + 40 // Adjusted to accommodate margins and borders
@@ -196,17 +235,47 @@ Page
                         topPadding: 20
                         rightPadding: 25
                         leftPadding: 25
-                        verticalAlignment: TextArea.AlignTop // Align text to the top
+                        verticalAlignment: TextArea.AlignTop
 
                         onCursorRectangleChanged: {
                             if (cursorRectangle.y + cursorRectangle.height > textbox.height) {
-                                // Scroll to the end of the text when the cursor approaches the bottom
-                                askme.ensureVisible(0, askme.contentHeight)
+
+                                //askme.ensureVisible(0, askme.contentHeight)
                             }
                         }
 
                         onTextChanged: {
                             textbox.height = Math.min(askme.contentHeight, parent.height) + 40 // Adjusted to accommodate margins and borders
+                        }
+                    }
+                }
+
+                Rectangle
+                {
+                    id: submitButton
+                    width: 30
+                    height: 30
+                    radius: 30
+                    color: "#f2f2f2"
+                    anchors.horizontalCenter: parent.horizontalCenter
+                    Text {
+                        text: qsTr("^")
+                        anchors.centerIn: parent
+                        color: "#9747FE"
+                        font.family: eBold.name
+                        font.pixelSize: 25
+                    }
+                    anchors.bottom: textbox.top
+                    anchors.bottomMargin: 10
+
+                    MouseArea
+                    {
+                        anchors.fill: parent
+
+                        onClicked:
+                        {
+                            createChatBubble(askme.text, askme.height)
+                            askme.text = ""
                         }
                     }
                 }
@@ -258,7 +327,9 @@ Page
 
                     Rectangle
                     {
-                        anchors.fill: parent
+                        anchors.centerIn: parent
+                        height: 40
+                        width: 40
                         color: "Transparent"
 
                         MouseArea
@@ -274,4 +345,11 @@ Page
             }
         }
     }
+
+    function createChatBubble(text, finalSize) {
+        var size = askme.height.toString();
+        var newRect = Qt.createQmlObject('import QtQuick 2.15; Rectangle { width: gpt.width - 50; height: ' + size + '; radius: 10; color: "#f2f2f2"; anchors.horizontalCenter: parent.horizontalCenter; anchors.top: line.bottom; anchors.topMargin: 20; }', scroll);
+        var newText = Qt.createQmlObject('import QtQuick 2.15; Text { text: "' + text + '"; color: "#9747FE"; width: parent.width - 40; wrapMode: Text.WordWrap; anchors.left: parent.left; anchors.leftMargin: 20; anchors.verticalCenter: parent.verticalCenter }', newRect);
+    }
+
 }
