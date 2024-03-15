@@ -275,6 +275,10 @@ Page
 
                         onClicked:
                         {
+                            var textToSend = askme.text.trim();
+                                    if (textToSend !== "") {
+                                        gptServer.sendToClient(textToSend);
+                                    }
                             createChatBubble(askme.text, askme.height)
                             askme.text = ""
                         }
@@ -347,17 +351,26 @@ Page
         }
     }
 
-    function createChatBubble(text) {
-        var size = askme.contentHeight + 50; // Adding a buffer for additional space
-        var newRect = Qt.createQmlObject('import QtQuick; Rectangle { width: gpt.width - 50; height: ' + size + '; radius: 10; color: "#f2f2f2"; opacity: 0.5; anchors.horizontalCenter: parent.horizontalCenter; anchors.top: scroll.top; anchors.topMargin: 20}', flickable.contentItem);
-        var newText = Qt.createQmlObject('import QtQuick; Text { text: "' + text + '"; color: "#9747FE"; width: parent.width - 40; wrapMode: Text.WordWrap; anchors.left: parent.left; anchors.leftMargin: 20; anchors.top: parent.top; anchors.topMargin: 20; anchors.right: parent.right; }', newRect);
+    function createChatBubble(text, source) {
+        var size = askme.contentHeight + 50;
+        var newRect = Qt.createQmlObject('import QtQuick 2.15; Rectangle { width: gpt.width - 50; height: ' + size + '; radius: 10; color: "#f2f2f2"; opacity: 0.5; anchors.horizontalCenter: parent.horizontalCenter; }', flickable.contentItem);
+        newRect.anchors.top = (source === "client") ? prevRect.bottom : scroll.top;
+        newRect.anchors.topMargin = (source === "client") ? 20 : 0;
+
+        var newText = Qt.createQmlObject('import QtQuick 2.15; Text { text: "' + text + '"; color: "#9747FE"; width: parent.width - 40; wrapMode: Text.WordWrap; anchors.left: parent.left; anchors.leftMargin: 20; }', newRect);
+        newText.anchors.top = newRect.top;
+        newText.anchors.topMargin = 20;
 
         // Update contentHeight of Flickable
         flickable.contentHeight = size + 100;
 
-        // Ensure the new content is visible
-        //flickable.contentY = flickable.contentHeight;
+        // Store the reference to the new rectangle for positioning the next one
+        var prevRect = newRect;
     }
 
+    // Inside the function where you receive messages from the client
+    function receiveMessageFromClient(message) {
+        createChatBubble(message, "client");
+    }
 
 }

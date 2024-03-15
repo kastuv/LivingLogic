@@ -127,6 +127,7 @@ Page
 
                         onClicked:
                         {
+                            gptServer.startServer();
                             loader.push("qrc:/LivingLogic/imgup.qml")
                         }
                     }
