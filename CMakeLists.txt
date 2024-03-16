@@ -27,6 +27,7 @@ qt_add_qml_module(applivlog
     QML_FILES report.qml
     SOURCES gptserver.h gptserver.cpp
     RESOURCES cont.qrc
+    RESOURCES interiror.qrc
 )
 
 # Qt for iOS sets MACOSX_BUNDLE_GUI_IDENTIFIER automatically since Qt 6.1.

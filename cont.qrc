@@ -2,5 +2,8 @@
     <qresource prefix="/">
         <file alias="c1">resources/c1.jpg</file>
         <file alias="c2">resources/c2.jpg</file>
+        <file alias="c3">resources/c3.jpg</file>
+        <file alias="c4">resources/c4.jpg</file>
+        <file alias="c5">resources/c5.jpg</file>
     </qresource>
 </RCC>
