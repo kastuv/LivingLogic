@@ -1,0 +1,6 @@
+<RCC>
+    <qresource prefix="/">
+        <file alias="eBold">Exo2-Bold.ttf</file>
+        <file alias="eRegular">Exo2-Regular.ttf</file>
+    </qresource>
+</RCC>
