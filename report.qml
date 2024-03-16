@@ -1,6 +1,7 @@
 import QtQuick
 import QtQuick.Controls
 import QtQuick.Layouts
+import QtQuick.Dialogs
 
 Page
 {
@@ -168,12 +169,19 @@ Page
 
                         onClicked:
                         {
-                            // var textToSend = "report::";
-                            // if (textToSend !== "") {
-                            //     var fileName = "report.pdf";
-                            //     gptServer.sendReceiveAndSaveFile(textToSend, fileName);
-                            // }
+                            fileDialog.open()
+                             console.log("Report Browse")
                         }
+
+                        FileDialog {
+                                id: fileDialog
+                                title: "Find Report.pdf"
+
+                                onAccepted: {
+                                    console.log("fileUrls:", fileDialog.currentFile)
+
+                                }
+                            }
                     }
                 }
             }

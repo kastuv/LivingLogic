@@ -5,6 +5,7 @@
         <file alias="arrow">backarrow.png</file>
         <file alias="home">home.png</file>
         <file alias="cam">cam.png</file>
-        <file alias="setting">setting.png</file>
+        <file>setting.png</file>
+        <file alias="setting">set.png</file>
     </qresource>
 </RCC>
