@@ -13,6 +13,7 @@ public:
     explicit GptServer(QObject *parent = nullptr);
     Q_INVOKABLE void startServer();
     Q_INVOKABLE void sendToClient(const QString &message);
+    Q_INVOKABLE void sendPhoto(const QString &photoPath);
 
 signals:
     void messageReceived(const QString &message);

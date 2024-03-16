@@ -2,6 +2,8 @@ import QtQuick
 import QtQuick.Controls
 import QtQuick.Layouts
 import com.example 1.0
+import QtMultimedia
+ import QtQuick.Dialogs
 
 Page
 {
@@ -127,6 +129,7 @@ Page
 
                 ColumnLayout
                 {
+                    id: up
                     anchors.fill: parent
                     spacing: -35
                     Text {
@@ -136,6 +139,7 @@ Page
                         font.weight: 500
                         font.pixelSize: 15
                         Layout.alignment: Qt.AlignHCenter
+                        wrapMode: TextArea.Wrap
                         color: "#f2f2f2"
                     }
                     Text {
@@ -152,29 +156,32 @@ Page
                         Layout.alignment: Qt.AlignHCenter
                         color: "#f2f2f2"
                     }
+
+                    FileDialog {
+                            id: fileDialog
+                            title: "Choose you space layout image"
+
+                            onAccepted: {
+                                console.log("fileUrls:", fileDialog.currentFile)
+                                var url = fileDialog.currentFile.toString();
+                                gptServer.sendPhoto(url);
+                                var lastFourCharacters = url.substring(url.length - 5); // Extract last 4 characters
+                                        drop.text = lastFourCharacters;
+
+                            }
+                        }
+
                 }
 
                 MouseArea {
                             anchors.fill: parent
-                        //     onClicked: {
-                        //         if (Qt.platform.os === "ios") {
-                        //             openIOSGallery()
-                        //         } else {
-                        //             console.log("Gallery access not supported on this platform.")
-                        //         }
-                        //     }
+                            onClicked:
+                            {
+                               fileDialog.open()
+                                console.log("File box opened")
+                            }
                         }
-
             }
-            // function openIOSGallery() {
-            //         // Access iOS photo gallery using platform-specific code
-            //         // This is Objective-C code to access iOS photo gallery
-            //         var obj = new Object();
-            //         obj.openGallery = function() {
-            //             Qt.createQmlObject('import QtQuick 2.0; Image { source: "image.jpg" }', parent, "dynamicSnippet1");
-            //         }
-            //         obj.openGallery();
-            //     }
 
             Rectangle
             {

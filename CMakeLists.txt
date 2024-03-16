@@ -7,7 +7,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTORCC ON)
 
-find_package(Qt6 6.2 COMPONENTS Quick REQUIRED)
+find_package(Qt6 6.2 COMPONENTS Quick Multimedia REQUIRED)
 
 qt_add_executable(applivlog
     main.cpp
@@ -26,6 +26,7 @@ qt_add_qml_module(applivlog
     QML_FILES contractor.qml
     QML_FILES report.qml
     SOURCES gptserver.h gptserver.cpp
+    RESOURCES cont.qrc
 )
 
 # Qt for iOS sets MACOSX_BUNDLE_GUI_IDENTIFIER automatically since Qt 6.1.
@@ -40,7 +41,9 @@ set_target_properties(applivlog PROPERTIES
 )
 
 target_link_libraries(applivlog
-    PRIVATE Qt6::Quick)
+    PRIVATE Qt6::Quick
+    PRIVATE Qt6::Multimedia
+)
 
 include(GNUInstallDirs)
 install(TARGETS applivlog

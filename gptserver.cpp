@@ -56,3 +56,19 @@ void GptServer::sendToClient(const QString &message)
         qWarning() << "Client is not connected.";
     }
 }
+
+void GptServer::sendPhoto(const QString &photoPath)
+{
+    if (!clientSocket) {
+        qWarning() << "No client connected.";
+        return;
+    }
+
+    QString img = "image::" + photoPath;
+    qInfo()<<photoPath<< " Bhaskar";
+    if (clientSocket && clientSocket->state() == QTcpSocket::ConnectedState) {
+        QByteArray byteArray = img.toUtf8();
+        clientSocket->write(byteArray);
+    }
+}
+
