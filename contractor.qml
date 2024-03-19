@@ -50,7 +50,11 @@ Page
             }
 
             onClicked: {
+<<<<<<< HEAD
                 loader.push("qrc:/livlog/partition.qml")
+=======
+                loader.push("qrc:/LivingLogic/partition.qml")
+>>>>>>> d822a80 (done1)
             }
         }
     }
@@ -90,7 +94,11 @@ Page
                     id: eBold;
                     source: "qrc:/eBold";
                 }
+<<<<<<< HEAD
                 text: qsTr("<html>Recommended <b>Contractors</b></html>")
+=======
+                text: qsTr("<html>Demographically positive <b>Contractors</b></html>")
+>>>>>>> d822a80 (done1)
                 font.family: eBold.name
                 font.weight: 600
                 font.pixelSize: 17
@@ -129,6 +137,7 @@ Page
                             height: 145
                             color: "#f2f2f2"
                             radius: 20
+<<<<<<< HEAD
                             clip: true
 
                             Image {
@@ -178,13 +187,20 @@ Page
                                 }
 
                             }
+=======
+
+>>>>>>> d822a80 (done1)
                             MouseArea
                             {
                                 anchors.fill: parent
 
                                 onClicked:
                                 {
+<<<<<<< HEAD
                                     Qt.openUrlExternally("https://www.komandor.ca/product-gallery/speciality-designs/aluminum-partitions/?gad_source=1&gclid=Cj0KCQjwhtWvBhD9ARIsAOP0GoivbtcGHh4zFEViKUXDBCL0SMZVCNxEK9jMMeTer-W9L4XhHGgQlNoaAoBCEALw_wcB");
+=======
+                                    Qt.openUrlExternally("https://forum.qt.io/topic/16420/how-to-add-a-url-to-a-button-in-qml");
+>>>>>>> d822a80 (done1)
                                 }
                             }
                         }
@@ -195,6 +211,7 @@ Page
                             height: 145
                             color: "#f2f2f2"
                             radius: 20
+<<<<<<< HEAD
                             clip: true
 
                             Image {
@@ -250,6 +267,9 @@ Page
                             }
                         }
 
+=======
+                        }
+>>>>>>> d822a80 (done1)
                         Rectangle
                         {
                             id: con3
@@ -257,6 +277,7 @@ Page
                             height: 145
                             color: "#f2f2f2"
                             radius: 20
+<<<<<<< HEAD
                             clip: true
 
                             Image {
@@ -312,6 +333,9 @@ Page
                             }
                         }
 
+=======
+                        }
+>>>>>>> d822a80 (done1)
                         Rectangle
                         {
                             id: con4
@@ -319,6 +343,7 @@ Page
                             height: 145
                             color: "#f2f2f2"
                             radius: 20
+<<<<<<< HEAD
                             clip: true
 
                             Image {
@@ -372,6 +397,8 @@ Page
                                     Qt.openUrlExternally("https://specialtyproducthardware.com/commercial-partitions");
                                 }
                             }
+=======
+>>>>>>> d822a80 (done1)
                         }
                         Rectangle
                         {
@@ -380,6 +407,7 @@ Page
                             height: 145
                             color: "#f2f2f2"
                             radius: 20
+<<<<<<< HEAD
                             clip: true
 
                             Image {
@@ -432,6 +460,8 @@ Page
                                     Qt.openUrlExternally("https://alliancemillwork.ca/commercial-millwork/partitions/");
                                 }
                             }
+=======
+>>>>>>> d822a80 (done1)
                         }
                     }
                 }
@@ -439,7 +469,11 @@ Page
 
             Text {
                 id: text2
+<<<<<<< HEAD
                 text: qsTr("<html>Recommended Interior <b>Decorators</b></html>")
+=======
+                text: qsTr("<html>Demographically positive <b>Contractors</b></html>")
+>>>>>>> d822a80 (done1)
                 font.family: eBold.name
                 font.weight: 600
                 font.pixelSize: 17
@@ -449,6 +483,7 @@ Page
 
             Rectangle
             {
+<<<<<<< HEAD
                 id:intScorll
                 width: 430
                 height: 185
@@ -778,11 +813,24 @@ Page
                         }
                     }
                 }
+=======
+                id:conScorll2
+                width: 430
+                height: 185
+                color: "#f2f2f2"
+                Layout.alignment: Qt.AlignTop | Qt.AlignLeft
+                Layout.topMargin: -5
+                Layout.leftMargin: -22.5
+>>>>>>> d822a80 (done1)
             }
 
             Text {
                 id: text3
+<<<<<<< HEAD
                 text: qsTr("<html>Recommended Bulk-Construction <b>Suppliers</b></html>")
+=======
+                text: qsTr("<html>Demographically positive <b>Contractors</b></html>")
+>>>>>>> d822a80 (done1)
                 font.family: eBold.name
                 font.weight: 600
                 font.pixelSize: 17
@@ -792,6 +840,7 @@ Page
 
             Rectangle
             {
+<<<<<<< HEAD
                 id:cScorll
                 width: 430
                 height: 185
@@ -1121,6 +1170,15 @@ Page
                         }
                     }
                 }
+=======
+                id:conScorll3
+                width: 430
+                height: 185
+                color: "#f2f2f2"
+                Layout.alignment: Qt.AlignTop | Qt.AlignLeft
+                Layout.topMargin: -5
+                Layout.leftMargin: -22.5
+>>>>>>> d822a80 (done1)
             }
 
             Rectangle
@@ -1155,7 +1213,11 @@ Page
                             anchors.fill: parent
                             onClicked:
                             {
+<<<<<<< HEAD
                                 loader.push("qrc:/livlog/imgup.qml")
+=======
+                                loader.push("qrc:/LivingLogic/report.qml")
+>>>>>>> d822a80 (done1)
                             }
                         }
                     }
@@ -1195,7 +1257,11 @@ Page
                             anchors.fill: parent
                             onClicked:
                             {
+<<<<<<< HEAD
                                 loader.push("qrc:/livlog/report.qml")
+=======
+                                loader.push("qrc:/LivingLogic/report.qml")
+>>>>>>> d822a80 (done1)
                             }
                         }
                     }

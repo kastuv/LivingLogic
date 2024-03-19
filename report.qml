@@ -1,7 +1,10 @@
 import QtQuick
 import QtQuick.Controls
 import QtQuick.Layouts
+<<<<<<< HEAD
 import QtQuick.Dialogs
+=======
+>>>>>>> d822a80 (done1)
 
 Page
 {
@@ -51,7 +54,11 @@ Page
             }
 
             onClicked: {
+<<<<<<< HEAD
                 loader.push("qrc:/livlog/imgup.qml")
+=======
+                loader.push("qrc:/LivingLogic/imgup.qml")
+>>>>>>> d822a80 (done1)
             }
         }
     }
@@ -137,7 +144,10 @@ Page
                     }
                 }
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> d822a80 (done1)
                 Rectangle
                 {
                     id: no
@@ -169,6 +179,7 @@ Page
 
                         onClicked:
                         {
+<<<<<<< HEAD
                             fileDialog.open()
                              console.log("Report Browse")
                         }
@@ -182,6 +193,14 @@ Page
 
                                 }
                             }
+=======
+                            var textToSend = "report::";
+                            if (textToSend !== "") {
+                                var fileName = "/Users/kaustuvpokharel/Documents/LivingLogic-app/report.pdf";
+                                gptServer.sendReceiveAndSaveFile(textToSend, fileName);
+                            }
+                        }
+>>>>>>> d822a80 (done1)
                     }
                 }
             }
