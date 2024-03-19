@@ -2,8 +2,12 @@ import QtQuick
 import QtQuick.Controls
 import QtQuick.Layouts
 import com.example 1.0
+<<<<<<< HEAD
 import QtMultimedia
  import QtQuick.Dialogs
+=======
+
+>>>>>>> d822a80 (done1)
 
 Page
 {
@@ -36,7 +40,11 @@ Page
             {
                 anchors.fill: parent
                 onClicked: {
+<<<<<<< HEAD
                     loader.push("qrc:/livlog/imgup.qml")
+=======
+                    loader.push("qrc:/LivingLogic/imgup.qml")
+>>>>>>> d822a80 (done1)
                 }
             }
         }
@@ -68,7 +76,11 @@ Page
             }
 
             onClicked: {
+<<<<<<< HEAD
                 loader.push("qrc:/livlog/initial.qml")
+=======
+                loader.push("qrc:/LivingLogic/initial.qml")
+>>>>>>> d822a80 (done1)
             }
         }
     }
@@ -129,7 +141,10 @@ Page
 
                 ColumnLayout
                 {
+<<<<<<< HEAD
                     id: up
+=======
+>>>>>>> d822a80 (done1)
                     anchors.fill: parent
                     spacing: -35
                     Text {
@@ -139,7 +154,10 @@ Page
                         font.weight: 500
                         font.pixelSize: 15
                         Layout.alignment: Qt.AlignHCenter
+<<<<<<< HEAD
                         wrapMode: TextArea.Wrap
+=======
+>>>>>>> d822a80 (done1)
                         color: "#f2f2f2"
                     }
                     Text {
@@ -156,6 +174,7 @@ Page
                         Layout.alignment: Qt.AlignHCenter
                         color: "#f2f2f2"
                     }
+<<<<<<< HEAD
 
                     FileDialog {
                             id: fileDialog
@@ -171,10 +190,13 @@ Page
                             }
                         }
 
+=======
+>>>>>>> d822a80 (done1)
                 }
 
                 MouseArea {
                             anchors.fill: parent
+<<<<<<< HEAD
                             onClicked:
                             {
                                fileDialog.open()
@@ -182,6 +204,27 @@ Page
                             }
                         }
             }
+=======
+                        //     onClicked: {
+                        //         if (Qt.platform.os === "ios") {
+                        //             openIOSGallery()
+                        //         } else {
+                        //             console.log("Gallery access not supported on this platform.")
+                        //         }
+                        //     }
+                        }
+
+            }
+            // function openIOSGallery() {
+            //         // Access iOS photo gallery using platform-specific code
+            //         // This is Objective-C code to access iOS photo gallery
+            //         var obj = new Object();
+            //         obj.openGallery = function() {
+            //             Qt.createQmlObject('import QtQuick 2.0; Image { source: "image.jpg" }', parent, "dynamicSnippet1");
+            //         }
+            //         obj.openGallery();
+            //     }
+>>>>>>> d822a80 (done1)
 
             Rectangle
             {
@@ -231,7 +274,11 @@ Page
                                 id: flickable
                                 anchors.fill: parent
                                 contentWidth: parent.width
+<<<<<<< HEAD
                                 contentHeight: Math.min(flickable.contentHeight)
+=======
+                                contentHeight: contentItem.height
+>>>>>>> d822a80 (done1)
                                 flickableDirection: Flickable.VerticalFlick
                                 clip: true
 
@@ -332,7 +379,11 @@ Page
                             var textToSend = askme.text.trim();
                             askme.text = "";
                             if (textToSend !== "") {
+<<<<<<< HEAD
                                 gptServer.sendToClient("gpt::" + textToSend);
+=======
+                                gptServer.sendToClient(textToSend);
+>>>>>>> d822a80 (done1)
                             }
                             createChatBubble(textToSend, true);
                         }
@@ -396,7 +447,11 @@ Page
                             anchors.fill: parent
                             onClicked:
                             {
+<<<<<<< HEAD
                                 loader.push("qrc:/livlog/parameter.qml")
+=======
+                                loader.push("qrc:/LivingLogic/parameter.qml")
+>>>>>>> d822a80 (done1)
                             }
                         }
                     }
@@ -407,12 +462,20 @@ Page
 
     function createChatBubble(text, isOutgoing) {
         var bubble = Qt.createQmlObject(
+<<<<<<< HEAD
             'import QtQuick; Rectangle { width: gpt.width - 100; radius: 10; color: "#f2f2f2"; opacity: 0.7; }',
+=======
+            'import QtQuick 2.15; Rectangle { width: gpt.width - 100; radius: 10; color: "#f2f2f2"; opacity: 0.7; }',
+>>>>>>> d822a80 (done1)
             flickable.contentItem
         );
 
         var newText = Qt.createQmlObject(
+<<<<<<< HEAD
             'import QtQuick; Text { color: "#f2f2f2"; opacity: 0.7; width: parent.width - 10; wrapMode: Text.Wrap; leftPadding: 20; rightPadding: 20; topPadding: 10; bottomPadding: 10; }',
+=======
+            'import QtQuick 2.15; Text { color: "#f2f2f2"; opacity: 0.7; width: parent.width - 10; wrapMode: Text.Wrap; leftPadding: 20; rightPadding: 20; topPadding: 10; bottomPadding: 10; }',
+>>>>>>> d822a80 (done1)
             bubble
         );
 
@@ -440,9 +503,14 @@ Page
 
         prevBubble = bubble;
         flickable.contentItem.children.push(bubble);
+<<<<<<< HEAD
         flickable.contentHeight = bubble.height + 100;
 
         //flickable.contentY = flickable.contentHeight - flickable.height;
+=======
+
+        flickable.contentY = flickable.contentHeight - flickable.height;
+>>>>>>> d822a80 (done1)
 
         recvv.anchors.top = bubble.bottom + 10;
         textbox.anchors.top = recvv.bottom + 10;

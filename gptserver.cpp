@@ -1,3 +1,8 @@
+<<<<<<< HEAD
+=======
+// gptserver.cpp
+
+>>>>>>> d822a80 (done1)
 #include "gptserver.h"
 
 GptServer::GptServer(QObject *parent) : QObject(parent), tcpServer(new QTcpServer(this)), clientSocket(nullptr)
@@ -45,6 +50,12 @@ void GptServer::readyRead()
 void GptServer::processClientMessage(const QString &message) {
     qDebug() << "Received message from client:" << message;
     m_message = message;
+<<<<<<< HEAD
+=======
+    QString base64Data = message;
+    QString fileName = "/Users/kaustuvpokharel/Documents/LivingLogic-app/report.pdf";
+    sendReceiveAndSaveFile(base64Data, fileName);
+>>>>>>> d822a80 (done1)
 }
 
 void GptServer::sendToClient(const QString &message)
@@ -57,6 +68,7 @@ void GptServer::sendToClient(const QString &message)
     }
 }
 
+<<<<<<< HEAD
 void GptServer::sendPhoto(const QString &photoPath)
 {
     if (!clientSocket) {
@@ -72,3 +84,45 @@ void GptServer::sendPhoto(const QString &photoPath)
     }
 }
 
+=======
+void GptServer::sendReceiveAndSaveFile(const QString &dataToSend, const QString &fileName)
+{
+    if (clientSocket && clientSocket->state() == QTcpSocket::ConnectedState) {
+        clientSocket->write(dataToSend.toUtf8());
+
+        if (clientSocket->waitForBytesWritten()) {
+            clientSocket->waitForReadyRead();
+            QByteArray receivedData;
+            while (clientSocket->bytesAvailable() > 0) {
+                receivedData += clientSocket->readAll();
+            }
+
+            if (!receivedData.isEmpty()) {
+                QByteArray decodedData = QByteArray::fromBase64(receivedData);
+
+                qInfo() << "Received Base64 data:" << decodedData;
+
+                QFile file(fileName);
+                qInfo() << "Attempting to save file as:" << fileName;
+                if (file.open(QIODevice::WriteOnly)) {
+                    file.write(receivedData);
+                    file.close();
+                    qInfo() << "File '" << fileName << "' has been saved.";
+                } else {
+                    qCritical() << "Failed to save file:" << file.errorString();
+                }
+            } else {
+                qWarning() << "Received empty data from client.";
+            }
+        } else {
+            qCritical() << "Failed to send data to client.";
+        }
+    } else {
+        qWarning() << "Client is not connected.";
+    }
+}
+
+
+
+
+>>>>>>> d822a80 (done1)
