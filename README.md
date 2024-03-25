@@ -1,3 +1,5 @@
+# LivingLogic
+
 Problem Statement(we believed):
 In Toronto, despite an abundance of housing options, a persistent housing crisis plagues the city. The issue lies not in the scarcity of housing but in the misalignment of resources with the needs of its residents. Take, for instance, the area near Seneca College, where over 50 apartments exist within a 20-mile radius, yet only 35% of students find accommodation there. Meanwhile, families and couples occupy these spaces, commuting long distances to work, also making them unhappy which leads them to search for another space as well.
 
